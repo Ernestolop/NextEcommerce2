@@ -1,15 +1,17 @@
-import { titleFont } from "@/config/fonts";
+import { Title } from '@/components';
 
 export const metadata = {
-  title: 'Ecommerce - Shop',
-  description: 'Tienda del ecommerce',
+  title: 'Teslo Shop',
+  description: 'Tienda de tesla',
 }
 
 const Shop = () => {
   return (
     <div className="">
-      <h1>Hello World!!</h1>
-      <h1 className={titleFont.className}>Hello World!!</h1>
+      <Title
+        title="Tienda"
+        subtitle="Todos los productos de Tesla"
+      />
     </div>
   )
 }
