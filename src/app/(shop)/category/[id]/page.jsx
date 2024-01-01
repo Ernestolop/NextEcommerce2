@@ -1,6 +1,12 @@
-const CategoryPage = () => {
+import { notFound } from 'next/navigation'
+
+const CategoryPage = ({ params }) => {
+  const id = params.id
+  if (id === 'men') {
+    notFound();
+  }
   return (
-    <div>CategoryPage</div>
+    <div>CategoryPage {id}</div>
   )
 }
 
