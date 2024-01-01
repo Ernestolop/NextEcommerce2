@@ -1,7 +1,9 @@
+import { TopMenu } from "@/components";
+
 const ShopLayout = ({ children }) => {
     return (
         <main>
-            ShopLayout
+            <TopMenu />
             {children}
         </main>
     )
