@@ -1,4 +1,8 @@
 import { Title } from '@/components';
+import { ProductsGrid } from '@/components';
+import { initialData } from '@/seed/seed';
+
+const products = initialData.products;
 
 export const metadata = {
   title: 'Teslo Shop',
@@ -12,6 +16,7 @@ const Shop = () => {
         title="Tienda"
         subtitle="Todos los productos de Tesla"
       />
+      <ProductsGrid products={products} />
     </div>
   )
 }
