@@ -4,3 +4,7 @@ export { default as Title } from './ui/title/Title';
 export { default as ProductsGrid } from './products/products-grid/ProductsGrid';
 export { default as ProductGridItem } from './products/products-grid/ProductGridItem';
 export { default as Sidebar } from './ui/sidebar/Sidebar';
+export { default as SizeSelector } from './product/size-selector/SizeSelector';
+export { default as QuantitySelector } from './product/quantity-selector/QuantitySelector';
+export { default as ProductSlideshow } from './product/slideshow/ProductSlideshow';
+export { default as ProductMobileSlideshow } from './product/slideshow/ProductMobileSlideshow';
