@@ -51,8 +51,6 @@ const CartPage = () => {
             }
           </div>
 
-
-          {/* Orden Summary */}
           <div className="bg-white rounded-xl shadow-xl p-7">
             <h2 className="text-2xl mb-2">Resumen de Orden</h2>
             <div className="grid grid-cols-2">
