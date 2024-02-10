@@ -9,7 +9,7 @@ export const metadata = {
 
 const Shop = async ({ searchParams }) => {
 
-  const { page, take } = searchParams
+  const { page, take } = searchParams;
 
   const { products, totalPages } = await getPaginatedProductsWithImages({ page, take });
 

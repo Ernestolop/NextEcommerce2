@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/prisma.mjs";
 
-export const getPaginatedProductsWithImages = async ({ page = 1, take = 12 }) => {
+export const getPaginatedProductsWithImages = async ({ page = 1, take = 12, gender }) => {
 
     const maxTake = 12 * 5;
 
@@ -11,6 +11,8 @@ export const getPaginatedProductsWithImages = async ({ page = 1, take = 12 }) =>
     if (take > maxTake) take = maxTake;
 
     take = Number(take);
+
+    const whereValues = gender ? { gender } : {}
 
     try {
 
@@ -25,11 +27,14 @@ export const getPaginatedProductsWithImages = async ({ page = 1, take = 12 }) =>
                         url: true
                     }
                 }
-            }
+            },
+            where: whereValues
         });
 
         //Obtener el total de páginas
-        const totalProducts = await prisma.product.count();
+        const totalProducts = await prisma.product.count({
+            where: whereValues
+        });
         const totalPages = Math.ceil(totalProducts / take);
 
         return {
