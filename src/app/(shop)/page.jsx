@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { Title } from '@/components';
 import { ProductsGrid } from '@/components';
 import { initialData } from '@/seed/seed';
@@ -10,9 +11,15 @@ export const metadata = {
   description: 'Tienda de tesla',
 }
 
-const Shop = async () => {
+const Shop = async ({ searchParams }) => {
 
-  const { products } = await getPaginatedProductsWithImages();
+  const { page, take } = searchParams
+
+  const { products } = await getPaginatedProductsWithImages({ page, take });
+
+  if (products.length === 0) {
+    redirect('/');
+  }
 
   return (
     <div className="">
