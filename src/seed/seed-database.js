@@ -1,4 +1,4 @@
-import prisma from '../lib/prisma.mjs'
+import prisma from '../lib/prisma.mjs/index.js'
 import { initialData } from './seed.js';
 
 const main = async () => {

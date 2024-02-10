@@ -1,15 +1,19 @@
 import { Title } from '@/components';
 import { ProductsGrid } from '@/components';
 import { initialData } from '@/seed/seed';
+import { getPaginatedProductsWithImages } from '@/actions';
 
-const products = initialData.products;
+//const products = initialData.products;
 
 export const metadata = {
   title: 'Teslo Shop',
   description: 'Tienda de tesla',
 }
 
-const Shop = () => {
+const Shop = async () => {
+
+  const { products } = await getPaginatedProductsWithImages();
+
   return (
     <div className="">
       <Title
