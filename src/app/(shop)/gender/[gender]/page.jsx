@@ -10,7 +10,7 @@ const labels = {
 }
 
 const CategoryPage = async ({ params, searchParams }) => {
-  const gender = params.id;
+  const gender = params.gender;
   const { page, take } = searchParams;
 
   if (!labels[gender]) return notFound();
