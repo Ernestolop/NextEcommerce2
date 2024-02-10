@@ -5,6 +5,30 @@ import { ProductSlideshow, ProductMobileSlideshow, QuantitySelector, SizeSelecto
 import { titleFont } from "@/config/fonts";
 import { getProductBySlug } from "@/actions";
 
+export async function generateMetadata({ params, searchParams }, parent) {
+  // read route params
+  const slug = params.slug
+
+  // fetch data
+  const product = await getProductBySlug(slug);
+
+  // optionally access and extend (rather than replace) parent metadata
+  //const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: product?.title,
+    description: product?.description,
+    openGraph: {
+      title: product?.title,
+      description: product?.description,
+      // https://misitioweb.com/producto/image.jpg
+      images: [
+        `products/${product?.images[0]}`,
+      ]
+    },
+  }
+}
+
 const Product = async ({ params }) => {
 
   const { slug } = params;
