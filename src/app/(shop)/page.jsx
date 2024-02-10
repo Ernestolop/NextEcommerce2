@@ -11,7 +11,7 @@ const Shop = async ({ searchParams }) => {
 
   const { page, take } = searchParams
 
-  const { products, currentPage, totalPages } = await getPaginatedProductsWithImages({ page, take });
+  const { products, totalPages } = await getPaginatedProductsWithImages({ page, take });
 
   if (products.length === 0) {
     redirect('/');
@@ -24,7 +24,7 @@ const Shop = async ({ searchParams }) => {
         subtitle="Todos los productos de Tesla"
       />
       <ProductsGrid products={products} />
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
+      <Pagination totalPages={totalPages} />
     </div>
   )
 }
