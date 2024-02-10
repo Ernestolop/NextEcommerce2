@@ -1,16 +1,23 @@
-import { notFound } from "next/navigation";
-import { ProductSlideshow, ProductMobileSlideshow, QuantitySelector, SizeSelector } from "@/components";
-import { titleFont } from "@/config/fonts";
-import { initialData } from "@/seed/seed";
+export const revalidate = 60 * 60 * 24 * 7; // 1 week
 
-const Product = ({ params }) => {
+import { notFound } from "next/navigation";
+import { ProductSlideshow, ProductMobileSlideshow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
+import { titleFont } from "@/config/fonts";
+import { getProductBySlug } from "@/actions";
+
+const Product = async ({ params }) => {
+
   const { slug } = params;
-  const product = initialData.products.find(product => product.slug === slug);
+
+  const product = await getProductBySlug(slug);
+
   if (!product) {
     notFound();
   }
+
   return (
     <div className="mt-5 mb-20 grid md:grid-cols-3 gap-3">
+
       <div className="col-span-1 md:col-span-2">
         {/* Mobile */}
         <ProductMobileSlideshow
@@ -25,7 +32,9 @@ const Product = ({ params }) => {
           className="hidden md:block"
         />
       </div>
+
       <div className="col-span-1 px-5">
+        <StockLabel slug={product.slug} />
         <h1 className={`${titleFont.className} antialiased font-bold text-xl `}> {product.title} </h1>
         <p className="text-lg mb-5"> ${product.price} </p>
 
@@ -43,6 +52,7 @@ const Product = ({ params }) => {
         <h3 className="font-bold text-sm ">Descripción</h3>
         <p className="font-light"> {product.description} </p>
       </div>
+
     </div>
   )
 }
