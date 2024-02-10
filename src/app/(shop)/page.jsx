@@ -1,10 +1,6 @@
 import { redirect } from 'next/navigation';
-import { Title } from '@/components';
-import { ProductsGrid } from '@/components';
-import { initialData } from '@/seed/seed';
+import { ProductsGrid, Pagination, Title } from '@/components';
 import { getPaginatedProductsWithImages } from '@/actions';
-
-//const products = initialData.products;
 
 export const metadata = {
   title: 'Teslo Shop',
@@ -15,7 +11,7 @@ const Shop = async ({ searchParams }) => {
 
   const { page, take } = searchParams
 
-  const { products } = await getPaginatedProductsWithImages({ page, take });
+  const { products, currentPage, totalPages } = await getPaginatedProductsWithImages({ page, take });
 
   if (products.length === 0) {
     redirect('/');
@@ -28,6 +24,7 @@ const Shop = async ({ searchParams }) => {
         subtitle="Todos los productos de Tesla"
       />
       <ProductsGrid products={products} />
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
     </div>
   )
 }
