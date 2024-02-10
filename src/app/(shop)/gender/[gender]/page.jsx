@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ProductsGrid, Pagination, Title } from "@/components";
 import { getPaginatedProductsWithImages } from '@/actions';
 
@@ -16,6 +16,10 @@ const CategoryPage = async ({ params, searchParams }) => {
   if (!labels[gender]) return notFound();
 
   const { products, totalPages } = await getPaginatedProductsWithImages({ page, take, gender });
+
+  if (products.length === 0) {
+    redirect(`/gender/${gender}`);
+  }
 
   return (
     <div>
