@@ -6,9 +6,22 @@ import { QuantitySelector, SizeSelector } from "@/components";
 const AddToCart = ({ product }) => {
 
     const [size, setSize] = useState();
+    const [quantity, setQuantity] = useState(0);
+    const [posted, setPosted] = useState(false)
+
+    const addToCart = () => {
+        setPosted(!posted);
+        if (!size) return;
+    }
 
     return (
         <>
+
+            {
+                (posted && !size) && (
+                    <span className="mt-2 text-red-500">Debe seleccionar una talla*</span>
+                )
+            }
 
             <SizeSelector
                 selectedSize={size}
@@ -17,10 +30,16 @@ const AddToCart = ({ product }) => {
             />
 
             <QuantitySelector
-                quantity={3}
+                quantity={quantity}
+                onQuantityChange={setQuantity}
             />
 
-            <button className="btn-primary my-5">Agregar al carrito</button>
+            <button
+                className="btn-primary my-5"
+                onClick={addToCart}
+            >
+                Agregar al carrito
+            </button>
         </>
     )
 }

@@ -1,17 +1,14 @@
 'use client';
 
-import { useState } from 'react';
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5';
 
-const QuantitySelector = ({ quantity }) => {
-
-    const [count, setCount] = useState(quantity);
+const QuantitySelector = ({ quantity, onQuantityChange }) => {
 
     const handleQuantityChange = value => {
-        if (count + value < 1) {
+        if (quantity + value < 0) {
             return;
         }
-        setCount(count + value);
+        onQuantityChange(quantity + value);
     }
 
     return (
@@ -22,7 +19,7 @@ const QuantitySelector = ({ quantity }) => {
                 <IoRemoveCircleOutline />
             </button>
             <span className='width-20 mx-3 px-5 bg-gray-100 text-center rounded'>
-                {count}
+                {quantity}
             </span>
             <button
                 onClick={() => handleQuantityChange(1)}
