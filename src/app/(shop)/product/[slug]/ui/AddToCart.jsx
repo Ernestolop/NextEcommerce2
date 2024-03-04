@@ -6,7 +6,7 @@ import { QuantitySelector, SizeSelector } from "@/components";
 const AddToCart = ({ product }) => {
 
     const [size, setSize] = useState();
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const [posted, setPosted] = useState(false)
 
     const addToCart = () => {

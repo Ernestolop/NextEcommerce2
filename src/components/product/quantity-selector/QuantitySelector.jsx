@@ -5,7 +5,7 @@ import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5';
 const QuantitySelector = ({ quantity, onQuantityChange }) => {
 
     const handleQuantityChange = value => {
-        if (quantity + value < 0) {
+        if (quantity + value < 1) {
             return;
         }
         onQuantityChange(quantity + value);
