@@ -1,7 +1,8 @@
 export const revalidate = 60 * 60 * 24 * 7; // 1 week
 
 import { notFound } from "next/navigation";
-import { ProductSlideshow, ProductMobileSlideshow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
+import { ProductSlideshow, ProductMobileSlideshow, StockLabel } from "@/components";
+import AddToCart from './ui/AddToCart';
 import { titleFont } from "@/config/fonts";
 import { getProductBySlug } from "@/actions";
 
@@ -62,16 +63,9 @@ const Product = async ({ params }) => {
         <h1 className={`${titleFont.className} antialiased font-bold text-xl `}> {product.title} </h1>
         <p className="text-lg mb-5"> ${product.price} </p>
 
-        <SizeSelector
-          selectedSize={product.sizes[0]}
-          avaibleSizes={product.sizes}
+        <AddToCart
+          product={product}
         />
-
-        <QuantitySelector
-          quantity={3}
-        />
-
-        <button className="btn-primary my-5">Agregar al carrito</button>
 
         <h3 className="font-bold text-sm ">Descripción</h3>
         <p className="font-light"> {product.description} </p>
