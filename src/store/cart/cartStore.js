@@ -1,36 +1,50 @@
 'use client'
 
-import { create } from 'zustand'
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export const useCartStore = create((set) => ({
-    cart: [],
+export const useCartStore = create(
 
-    addProductToCart: product => {
-        const { cart } = get();
+    persist(
+        (set, get) => ({
+            cart: [],
 
-        const productInCart = cart.some(
-            item => (item.id === product.id && item.size === product.size)
-        )
+            getTotalItems: () => {
+                const { cart } = get();
+                return cart.reduce((total, item) => total + item.quantity, 0);
+            },
 
-        if (!productInCart) {
-            set({
-                cart: [...cart, product]
-            })
-            return;
-        }
+            addProductToCart: product => {
+                const { cart } = get();
 
-        const updateCartProducts = cart.map(item => {
-            if (item.id === product.id && item.size === product.size) {
-                return {
-                    ...item,
-                    quantity: item.quantity + product.quantity
+                const productInCart = cart.some(
+                    item => (item.id === product.id && item.size === product.size)
+                )
+
+                if (!productInCart) {
+                    set({
+                        cart: [...cart, product]
+                    })
+                    return;
                 }
-            }
-            return item;
-        })
 
-        set({
-            cart: updateCartProducts
-        })
-    }
-}))
+                const updateCartProducts = cart.map(item => {
+                    if (item.id === product.id && item.size === product.size) {
+                        return {
+                            ...item,
+                            quantity: item.quantity + product.quantity
+                        }
+                    }
+                    return item;
+                })
+
+                set({
+                    cart: updateCartProducts
+                })
+            }
+        }),
+        {
+            name: 'shopping-cart'
+        }
+    )
+)
