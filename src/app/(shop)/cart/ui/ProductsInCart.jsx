@@ -10,6 +10,7 @@ const ProductsInCart = () => {
 
     const [load, setLoad] = useState(true);
     const updateProductQuantity = useCartStore(state => state.updateProductQuantity);
+    const removeProduct = useCartStore(state => state.removeProduct);
     const productsInCart = useCartStore(state => state.cart);
 
     useEffect(() => {
@@ -48,7 +49,7 @@ const ProductsInCart = () => {
                                 quantity={product.quantity}
                                 onQuantityChange={quantity => updateProductQuantity(product, quantity)}
                             />
-                            <button className="underline mt-3">
+                            <button className="underline mt-3" onClick={() => removeProduct(product)}>
                                 Remover
                             </button>
                         </div>

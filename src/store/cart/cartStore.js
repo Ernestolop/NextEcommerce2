@@ -61,7 +61,17 @@ export const useCartStore = create(
                 set({
                     cart: updateCartProducts
                 })
-            }
+            },
+
+            removeProduct: (productToRemove) => {
+                const { cart } = get();
+
+                const updateCartProducts = cart.filter(item => (item.id !== productToRemove.id || item.size !== productToRemove.size))
+
+                set({
+                    cart: updateCartProducts
+                })
+            },
 
         }),
         {
