@@ -41,7 +41,28 @@ export const useCartStore = create(
                 set({
                     cart: updateCartProducts
                 })
+            },
+
+            updateProductQuantity: (productToUpdate, newQuantity) => {
+                const { cart } = get();
+
+                if (newQuantity < 1) return;
+
+                const updateCartProducts = cart.map(item => {
+                    if (item.id === productToUpdate.id && item.size === productToUpdate.size) {
+                        return {
+                            ...item,
+                            quantity: newQuantity
+                        }
+                    }
+                    return item;
+                })
+
+                set({
+                    cart: updateCartProducts
+                })
             }
+
         }),
         {
             name: 'shopping-cart'

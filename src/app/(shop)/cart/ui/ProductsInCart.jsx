@@ -9,6 +9,7 @@ import { QuantitySelector } from '@/components';
 const ProductsInCart = () => {
 
     const [load, setLoad] = useState(true);
+    const updateProductQuantity = useCartStore(state => state.updateProductQuantity);
     const productsInCart = useCartStore(state => state.cart);
 
     useEffect(() => {
@@ -41,11 +42,11 @@ const ProductsInCart = () => {
                             <Link
                                 href={`/product/${product.slug}`}
                                 className="hover:underline cursor-pointer"
-                            >{product.title}</Link>
+                            >{product.title} - {product.size}</Link>
                             <p>${product.price}</p>
                             <QuantitySelector
-                                quantity={3}
-                                onQuantityChange={value => console.log(value)}
+                                quantity={product.quantity}
+                                onQuantityChange={quantity => updateProductQuantity(product, quantity)}
                             />
                             <button className="underline mt-3">
                                 Remover
