@@ -14,6 +14,23 @@ export const useCartStore = create(
                 return cart.reduce((total, item) => total + item.quantity, 0);
             },
 
+            getSummaryInformation: () => {
+                const { cart } = get();
+
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                const subTotal = cart.reduce((subTotal, item) => subTotal + (item.price * item.quantity), 0);
+                const tax = subTotal * 0.11;
+                const total = subTotal + tax;
+
+                return {
+                    totalItems,
+                    subTotal,
+                    tax,
+                    total
+                }
+
+            },
+
             addProductToCart: product => {
                 const { cart } = get();
 
