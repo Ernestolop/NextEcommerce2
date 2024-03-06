@@ -3,10 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
 import { IoSearchOutline, IoCartOutline } from 'react-icons/io5';
-import { titleFont } from '@/config/fonts';
 import { useCartStore, useUiStore } from '@/store';
 
-const TopMenu = () => {
+const TopMenu = ({titleFont}) => {
 
   const [loaded, setLoaded] = useState(false);
   const openMenu = useUiStore(state => state.openSideMenu);
@@ -20,7 +19,7 @@ const TopMenu = () => {
     <nav className="flex p-5 justify-between items-center w-full">
       <div>
         <Link href="/">
-          <span className={`${titleFont.className} antialiased font-bold`}>Teslo</span>
+          <span className={`${titleFont} antialiased font-bold`}>Teslo</span>
           <span> | Shop</span>
         </Link>
       </div>
@@ -35,7 +34,9 @@ const TopMenu = () => {
         <Link href="/search" className='mx-2'>
           <IoSearchOutline className='w-5 h-5' />
         </Link>
-        <Link href="/cart" className='mx-2'>
+        <Link href={
+          (totalItemsInCart === 0 && loaded) ? "/cart/empty" : "/cart"
+        } className='mx-2'>
           <div className="relative">
             {
               loaded && (
